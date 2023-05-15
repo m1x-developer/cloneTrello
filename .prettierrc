@@ -1,0 +1,15 @@
+{
+  "singleQuote": true,
+  "semi": false,
+  "trailingComma": "all",
+  "singleAttributePerLine": false,
+  "useTabs": true,
+  "overrides": [
+    {
+      "files": "*.ejs",
+      "options": {
+        "parser": "html"
+      }
+    }
+  ]
+}
