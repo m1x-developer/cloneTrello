@@ -11,6 +11,12 @@ export const ROUTES = {
 export class PAGES {
 	static ROOT = '/'
 
+	static AUTH = 'auth'
+
+	static REGISTRATION = `${this.AUTH}/registration`
+
+	static LOGIN = `${this.AUTH}/login`
+
 	static KANBAN = 'kanban'
 
 	static BOARD = `${this.ROOT}${ROUTES.BOARD}`
