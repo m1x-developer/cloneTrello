@@ -3,6 +3,7 @@ import {
 	Box,
 	Center,
 	createStyles,
+	Flex,
 	Navbar,
 	Stack,
 	Tooltip,
@@ -20,6 +21,7 @@ import {
 	IconUser,
 } from '@tabler/icons'
 import { Outlet, useNavigate } from 'react-router-dom'
+import { MainHeader } from '../Header/Header'
 
 const useStyles = createStyles((theme) => ({
 	link: {
@@ -121,7 +123,10 @@ export const MainLayout = () => {
 						</Stack>
 					</Navbar.Section>
 				</Navbar>
-				<Outlet />
+				<Flex direction={'column'} sx={{ width: '100%' }}>
+					<MainHeader />
+					<Outlet />
+				</Flex>
 			</Box>
 		</>
 	)

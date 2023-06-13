@@ -3,4 +3,5 @@ export type ItemProps = {
 	name: string
 	description: string
 	image?: string
+	isLastItem?: boolean
 }

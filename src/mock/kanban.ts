@@ -118,7 +118,7 @@ export const board_mock = [
 	{
 		id: '7',
 		name: 'В процессе',
-		cards: [],
+		cards: null,
 	},
 	{
 		id: '8',
