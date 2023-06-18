@@ -13,9 +13,9 @@ export class PAGES {
 
 	static AUTH = 'auth'
 
-	static REGISTRATION = `${this.AUTH}/registration`
+	static REGISTRATION = `/${this.AUTH}/registration`
 
-	static LOGIN = `${this.AUTH}/login`
+	static LOGIN = `/${this.AUTH}/login`
 
 	static KANBAN = 'kanban'
 

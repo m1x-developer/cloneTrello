@@ -1,12 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Card, Flex, Title } from '@mantine/core'
 import { board_mock } from '../../../../mock/kanban'
 import { BoardItem } from '../../components/BoardItem/BoardItem'
-import firebase from 'firebase/compat'
 
 export const Board = () => {
-	const auth = firebase.auth()
-	console.log(auth)
 	return (
 		<Flex gap="md" justify="flex-start" wrap="nowrap" p={20}>
 			{board_mock.map((board) => {

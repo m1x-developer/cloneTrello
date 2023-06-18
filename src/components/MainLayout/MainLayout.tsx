@@ -22,39 +22,8 @@ import {
 } from '@tabler/icons'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { MainHeader } from '../Header/Header'
-
-const useStyles = createStyles((theme) => ({
-	link: {
-		width: '50px',
-		height: '50px',
-		borderRadius: theme.radius.md,
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		color:
-			theme.colorScheme === 'dark'
-				? theme.colors.dark[0]
-				: theme.colors.gray[7],
-
-		'&:hover': {
-			backgroundColor:
-				theme.colorScheme === 'dark'
-					? theme.colors.dark[5]
-					: theme.colors.gray[0],
-		},
-	},
-
-	active: {
-		'&, &:hover': {
-			backgroundColor: theme.fn.variant({
-				variant: 'light',
-				color: theme.primaryColor,
-			}).background,
-			color: theme.fn.variant({ variant: 'light', color: theme.primaryColor })
-				.color,
-		},
-	},
-}))
+import { useAuth } from '../../hooks/useAuth'
+import { useMainLayoutStyles } from './MainLayoutStyles'
 
 interface NavbarLinkProps {
 	//TODO FIX ANY
@@ -66,7 +35,7 @@ interface NavbarLinkProps {
 }
 
 function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
-	const { classes, cx } = useStyles()
+	const { classes, cx } = useMainLayoutStyles()
 	return (
 		<Tooltip label={label} position="right">
 			<UnstyledButton
@@ -91,6 +60,7 @@ const mockData = [
 ]
 
 export const MainLayout = () => {
+	const { signOut } = useAuth()
 	const navigate = useNavigate()
 	const [active, setActive] = useState(0)
 
@@ -119,7 +89,7 @@ export const MainLayout = () => {
 					<Navbar.Section>
 						<Stack justify="center" spacing={0}>
 							<NavbarLink icon={IconSwitchHorizontal} label="Change account" />
-							<NavbarLink icon={IconLogout} label="Logout" />
+							<NavbarLink icon={IconLogout} label="Logout" onClick={signOut} />
 						</Stack>
 					</Navbar.Section>
 				</Navbar>

@@ -1,24 +1,19 @@
 import React from 'react'
-import { useNavigate, useRoutes } from 'react-router-dom'
+import { useRoutes } from 'react-router-dom'
 import { protectedRoutes } from './protected'
 import { publicRoutes } from './public'
-import { getAuth } from 'firebase/auth'
-import { useAuthState } from 'react-firebase-hooks/auth'
+
+import { useAuth } from '../hooks/useAuth'
 import { LoadingOverlay } from '@mantine/core'
-import { PAGES } from '../helpers/pages'
 
 export const AppRoutes = () => {
-	//вынести в контектст
-	const [user, loading] = useAuthState(getAuth())
-	const token = localStorage.getItem('accessToken')
-	const navigate = useNavigate()
+	const { currentUser, userLoading } = useAuth()
 
-	if (loading) {
-		// TODO: Добавьте экран загрузки
+	if (userLoading) {
 		return <LoadingOverlay visible />
 	}
 
-	const routes = user ? protectedRoutes : publicRoutes
+	const routes = currentUser ? protectedRoutes : publicRoutes
 
 	return useRoutes([...routes])
 }

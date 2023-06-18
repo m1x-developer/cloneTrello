@@ -7,27 +7,15 @@ import {
 	TextInput,
 	Title,
 } from '@mantine/core'
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
+import { useAuth } from '../../../../hooks/useAuth'
 
 export const RegistrationPage = () => {
+	const { createUser } = useAuth()
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
 	const handleSignup = () => {
-		const auth = getAuth()
-
-		createUserWithEmailAndPassword(auth, email, password)
-			.then((userCredential) => {
-				// Регистрация успешна
-				const user = userCredential.user
-				console.log('Регистрация успешна:', user)
-			})
-			.catch((error) => {
-				// Обработка ошибок при регистрации
-				const errorCode = error.code
-				const errorMessage = error.message
-				console.log('Ошибка при регистрации:', errorCode, errorMessage)
-			})
+		createUser(email, password)
 	}
 
 	return (

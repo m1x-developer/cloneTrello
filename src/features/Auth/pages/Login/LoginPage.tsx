@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
 	Anchor,
 	Button,
@@ -13,35 +13,16 @@ import {
 } from '@mantine/core'
 import { useNavigate } from 'react-router-dom'
 import { PAGES } from '../../../../helpers/pages'
-
-import firebase from 'firebase/compat'
+import { useAuth } from '../../../../hooks/useAuth'
 
 export const LoginPage = () => {
+	const { signIn } = useAuth()
 	const navigate = useNavigate()
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	console.log(email, password)
-
-	useEffect(() => {
-		firebase.auth().onAuthStateChanged((user) => {
-			if (user) {
-				user.getIdToken(/* forceRefresh */ true).then((idToken) => {
-					localStorage.setItem('accessToken', idToken)
-				})
-				user.getIdTokenResult().then((idTokenResult) => {
-					localStorage.setItem('refreshToken', idTokenResult?.token)
-				})
-			}
-		})
-	}, [])
 
 	const handleLogin = async () => {
-		try {
-			await firebase.auth().signInWithEmailAndPassword(email, password)
-			console.log('удачно')
-		} catch (error) {
-			console.log(error)
-		}
+		signIn(email, password)
 	}
 	return (
 		<Container size={420} my={40}>

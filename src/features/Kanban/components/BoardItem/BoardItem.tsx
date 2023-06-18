@@ -19,9 +19,15 @@ export const BoardItem = ({
 	name,
 	image,
 	isLastItem,
+	id,
 }: ItemProps) => {
 	const [addingCard, setAddingCard] = useState(false)
 	const [newCardText, setNewCardText] = useState('')
+
+	const addNewCard = () => {
+		console.log(id)
+	}
+
 	return (
 		<>
 			<Card shadow="xs" radius="md" withBorder mt={10}>
@@ -96,7 +102,13 @@ export const BoardItem = ({
 						}) => setNewCardText(e.target.value)}
 					/>
 					{newCardText ? (
-						<Button variant="light" color="blue" fullWidth radius="md">
+						<Button
+							variant="light"
+							color="blue"
+							fullWidth
+							radius="md"
+							onClick={addNewCard}
+						>
 							Добавить карточку
 						</Button>
 					) : (

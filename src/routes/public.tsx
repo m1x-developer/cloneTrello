@@ -18,6 +18,4 @@ export const publicRoutes = [
 		path: PAGES.LOGIN,
 		element: <LoginPage />,
 	},
-
-	{ path: '*', element: <Navigate to={PAGES.REGISTRATION} /> },
 ]
