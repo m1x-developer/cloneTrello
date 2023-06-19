@@ -6,6 +6,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { PAGES } from '../helpers/pages'
 import { useNavigate } from 'react-router-dom'
 import { collection, doc, setDoc } from 'firebase/firestore'
+import { kanban_mock } from '../mock/kanban'
 
 export type AuthContextType = {
 	currentUser: User | null | undefined
@@ -36,7 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 				userId: user.uid,
 				name: null,
 				age: null,
-				boards: [],
+				boards: kanban_mock,
 			}
 			await setDoc(doc(collection(db, 'users'), user.uid), newUser)
 			navigate(PAGES.ROOT)

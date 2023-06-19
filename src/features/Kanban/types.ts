@@ -8,9 +8,22 @@ export type ItemProps = {
 	isLastItem?: boolean
 }
 
+export type Cardtem = {
+	description: string
+	id: string
+	labels: string[]
+	name: string
+}
+
+export type ListItem = {
+	id: string
+	name: string
+	cards: Cardtem[]
+}
+
 export type BoardType = {
 	id: string
-	lists: []
+	lists: ListItem[]
 	name: string
 }
 

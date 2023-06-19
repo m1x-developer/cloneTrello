@@ -1,6 +1,6 @@
 export const kanban_mock = [
 	{
-		id: '1',
+		id: 'test-desk',
 		name: 'Пример доски 1',
 		lists: [
 			{
@@ -45,58 +45,12 @@ export const kanban_mock = [
 			},
 		],
 	},
-	{
-		id: '11',
-		name: 'Пример доски 2',
-		lists: [
-			{
-				id: '12',
-				name: 'Сделать',
-				cards: [
-					{
-						id: '13',
-						name: 'Заказать материалы',
-						description: 'Заказать материалы для производства',
-						labels: ['важно'],
-						members: ['14'],
-						dueDate: '2021-11-01',
-					},
-					{
-						id: '15',
-						name: 'Перепроверить расчеты',
-						description: 'Перепроверить расчеты перед отправкой заказа',
-						labels: ['срочно'],
-						members: ['16'],
-					},
-				],
-			},
-			{
-				id: '17',
-				name: 'В процессе',
-				cards: [],
-			},
-			{
-				id: '18',
-				name: 'Сделано',
-				cards: [
-					{
-						id: '19',
-						name: 'Отправить заказ',
-						description: 'Отправить заказ клиенту',
-						labels: ['важно'],
-						members: ['20'],
-						dueDate: '2021-11-07',
-					},
-				],
-			},
-		],
-	},
 ]
 
 export const board_mock = [
 	{
 		id: '2',
-		name: 'Сделать',
+		name: 'Первая доска',
 		cards: [
 			{
 				id: '3',
@@ -112,25 +66,6 @@ export const board_mock = [
 				description: 'Позвонить и узнать о их потребностях',
 				labels: ['срочно'],
 				members: ['6'],
-			},
-		],
-	},
-	{
-		id: '7',
-		name: 'В процессе',
-		cards: null,
-	},
-	{
-		id: '8',
-		name: 'Сделано',
-		cards: [
-			{
-				id: '9',
-				name: 'Завершить проект',
-				description: 'Завершить проект и отправить результат заказчику',
-				labels: ['важно'],
-				members: ['10'],
-				dueDate: '2021-10-31',
 			},
 		],
 	},
