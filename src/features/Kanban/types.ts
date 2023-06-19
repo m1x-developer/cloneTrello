@@ -1,3 +1,5 @@
+import { User } from '@firebase/auth'
+
 export type ItemProps = {
 	id: string
 	name: string
@@ -17,4 +19,14 @@ export type UserCollectionType = {
 	boards: BoardType[]
 	name: string | null
 	userId: string
+}
+
+export type AddNewBoardAPIPayload = {
+	currentUser: User
+	boardValue: string
+}
+
+export type DeleteBoardAPIPayload = {
+	currentUser: User
+	index: number
 }
