@@ -3,22 +3,36 @@ import React, { useEffect, useState } from 'react'
 import { Board } from './components/Board/Board'
 import { generatePath, useNavigate } from 'react-router-dom'
 import { PAGES, PARAM_NAMES } from '../../helpers/pages'
-import { Button, Group, Input } from '@mantine/core'
+import { Button, Group, Input, LoadingOverlay } from '@mantine/core'
 import { db } from '../../helpers/firebase'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { useAuth } from '../../hooks/useAuth'
 import { v4 } from 'uuid'
+import { testType, UserCollectionType } from './types'
+import useRequest from '../../hooks/useRequest'
+import { fetchUserById } from './api'
+import { User } from '@firebase/auth'
 
 export const Kanban = () => {
+	const navigate = useNavigate()
 	const { currentUser } = useAuth()
 	const userDoc = doc(db, 'users', currentUser ? currentUser.uid : '')
-
-	// TODO FIX ANY
-	const [userCollection, setUserCollection] = useState<any>([])
 	const [boardValue, setBoardValue] = useState('')
-	console.log(userCollection.boards)
 
-	const navigate = useNavigate()
+	const [userCollection, setUserCollection] =
+		useState<UserCollectionType | null>()
+
+	const [getBoards, isLoadingBoards, dataBoards] = useRequest<
+		string,
+		UserCollectionType
+	>({
+		method: fetchUserById,
+		successCallback: (data) => {
+			setUserCollection(data)
+		},
+		failCallback: (e) => console.log(e),
+	})
+	console.log(userCollection)
 
 	const boardHandler = (id: string) => {
 		navigate(
@@ -45,47 +59,33 @@ export const Kanban = () => {
 					boards: newBoards,
 				})
 				setBoardValue('')
-				getBoards()
+				getBoards(currentUser.uid)
 			} catch (error) {
 				console.error(error)
 			}
 		}
 	}
-	const getBoards = async () => {
-		try {
-			const userSnapshot = await getDoc(userDoc)
 
-			if (userSnapshot.exists()) {
-				const userData = userSnapshot.data()
-				if (userData) {
-					setUserCollection(userData)
-				}
-			}
-		} catch (error) {
-			console.error(
-				'Ошибка при получении пользователя по текущему идентификатору:',
-				error,
-			)
-		}
-	}
-	console.log(userDoc)
 	useEffect(() => {
-		getBoards()
+		if (currentUser) {
+			getBoards(currentUser?.uid)
+		}
 	}, [currentUser?.uid])
+
+	if (isLoadingBoards && !userCollection) return <LoadingOverlay visible />
 
 	return (
 		<Group spacing="xl">
-			{userCollection.boards &&
-				userCollection.boards.map((desks) => {
-					return (
-						<Board
-							key={desks.id}
-							image={''}
-							title={desks.name}
-							onClick={() => boardHandler(desks.id)}
-						/>
-					)
-				})}
+			{userCollection?.boards.map((desks) => {
+				return (
+					<Board
+						key={desks.id}
+						image={''}
+						title={desks.name}
+						onClick={() => boardHandler(desks.id)}
+					/>
+				)
+			})}
 			<Input
 				placeholder="Название доски"
 				value={boardValue}
