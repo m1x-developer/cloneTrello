@@ -8,10 +8,9 @@ import { db } from '../../helpers/firebase'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { useAuth } from '../../hooks/useAuth'
 import { v4 } from 'uuid'
-import { testType, UserCollectionType } from './types'
+import { UserCollectionType } from './types'
 import useRequest from '../../hooks/useRequest'
 import { fetchUserById } from './api'
-import { User } from '@firebase/auth'
 
 export const Kanban = () => {
 	const navigate = useNavigate()
@@ -32,7 +31,6 @@ export const Kanban = () => {
 		},
 		failCallback: (e) => console.log(e),
 	})
-	console.log(userCollection)
 
 	const boardHandler = (id: string) => {
 		navigate(

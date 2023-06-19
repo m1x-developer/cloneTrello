@@ -1,57 +1,3 @@
-// import { useEffect, useState } from 'react'
-//
-// export const useRequest = <Query, Result>({
-// 	method,
-// 	successCallback,
-// 	failCallback,
-// 	exceptionCallback,
-// 	commonCallback,
-// 	methodDependencies,
-// }: {
-// 	method: (query: Query) => Promise<Result>
-// 	successCallback?: (data: Result) => void
-// 	failCallback?: (error: Error) => void
-// 	exceptionCallback?: (error: Error) => void
-// 	commonCallback?: () => void
-// 	methodDependencies?: any[]
-// }): [() => void, Result | null, boolean, Error | null] => {
-// 	const [data, setData] = useState<Result | null>(null)
-// 	const [loading, setLoading] = useState<boolean>(false)
-// 	const [error, setError] = useState<Error | null>(null)
-//
-// 	const runMethod = () => {
-// 		setLoading(true)
-// 		setError(null)
-//
-// 		method({} as Query)
-// 			.then((result) => {
-// 				setData(result)
-// 				if (successCallback) successCallback(result)
-// 			})
-// 			.catch((error) => {
-// 				setError(error)
-// 				if (failCallback) failCallback(error)
-// 			})
-// 			.catch((error) => {
-// 				if (exceptionCallback) exceptionCallback(error)
-// 			})
-// 			.finally(() => {
-// 				setLoading(false)
-// 				if (commonCallback) commonCallback()
-// 			})
-// 	}
-//
-// 	useEffect(() => {
-// 		if (methodDependencies) {
-// 			runMethod()
-// 		}
-// 	}, methodDependencies)
-//
-// 	return [runMethod, data, loading, error]
-// }
-//
-// export default useRequest
-
 import { useCallback, useState } from 'react'
 
 export type RequestType<Payload = unknown, Result = unknown> = {
@@ -73,7 +19,7 @@ export const useRequest = <Payload, Result>({
 }: RequestType<Payload, Result>): [
 	(model: Payload) => Promise<void>,
 	boolean,
-	Result | undefined,
+	Result,
 ] => {
 	const [isLoading, setIsLoading] = useState(false)
 	const [successData, setSuccessData] = useState<Result>()
@@ -97,7 +43,7 @@ export const useRequest = <Payload, Result>({
 		}
 	}, methodDependencies || [])
 
-	return [runMethod, isLoading, successData]
+	return [runMethod, isLoading, successData as Result]
 }
 
 export default useRequest

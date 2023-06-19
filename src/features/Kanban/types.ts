@@ -12,11 +12,6 @@ export type BoardType = {
 	name: string
 }
 
-export type testType = {
-	type: string
-	path: string
-	docId: string
-}
 export type UserCollectionType = {
 	age: string | null
 	boards: BoardType[]

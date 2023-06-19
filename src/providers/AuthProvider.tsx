@@ -36,7 +36,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 				userId: user.uid,
 				name: null,
 				age: null,
-				boards: null,
+				boards: [],
 			}
 			await setDoc(doc(collection(db, 'users'), user.uid), newUser)
 			navigate(PAGES.ROOT)
