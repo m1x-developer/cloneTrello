@@ -8,22 +8,22 @@ export type ItemProps = {
 	isLastItem?: boolean
 }
 
-export type Cardtem = {
+export type ColumnsCard = {
 	description: string
 	id: string
 	labels: string[]
 	name: string
 }
 
-export type ListItem = {
+export type Column = {
 	id: string
 	name: string
-	cards: Cardtem[]
+	columnCards: ColumnsCard[]
 }
 
 export type BoardType = {
 	id: string
-	lists: ListItem[]
+	columns: Column[]
 	name: string
 }
 
@@ -42,4 +42,9 @@ export type AddNewBoardAPIPayload = {
 export type DeleteBoardAPIPayload = {
 	currentUser: User
 	index: number
+}
+
+export type AddNewCardAPIPayload = {
+	currentUser: User
+	boardId: string
 }

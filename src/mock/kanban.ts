@@ -2,11 +2,11 @@ export const kanban_mock = [
 	{
 		id: 'test-desk',
 		name: 'Пример доски 1',
-		lists: [
+		columns: [
 			{
 				id: '2',
 				name: 'Сделать',
-				cards: [
+				columnCards: [
 					{
 						id: '3',
 						name: 'Написать письмо',
@@ -27,12 +27,12 @@ export const kanban_mock = [
 			{
 				id: '7',
 				name: 'В процессе',
-				cards: [],
+				columnCards: [],
 			},
 			{
 				id: '8',
 				name: 'Сделано',
-				cards: [
+				columnCards: [
 					{
 						id: '9',
 						name: 'Завершить проект',

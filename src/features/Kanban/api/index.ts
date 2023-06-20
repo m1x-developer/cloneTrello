@@ -1,5 +1,7 @@
 import {
 	AddNewBoardAPIPayload,
+	AddNewCardAPIPayload,
+	BoardType,
 	DeleteBoardAPIPayload,
 	UserCollectionType,
 } from '../types'
@@ -58,6 +60,36 @@ export const deleteBoardAPI = async ({
 		await updateDoc(doc(db, 'users', currentUser.uid), {
 			boards: newData,
 		})
+	} catch (error) {
+		throw new Error('Не удалось добавить доску')
+	}
+}
+
+export const addNewCardAPI = async ({
+	currentUser,
+	boardId,
+}: AddNewCardAPIPayload): Promise<void> => {
+	try {
+		const userDoc = doc(db, 'users', currentUser ? currentUser.uid : '')
+		const userSnapshot = await getDoc(userDoc)
+		const Boards = userSnapshot.data()?.boards as BoardType[]
+		// const currentBoard = Boards.find((board) => board.id === boardValue)
+
+		// const currentList = currentBoard?.lists.find(
+		// 	(listItem) => listItem.id === listId,
+		// )
+
+		// const newBoards = [
+		// 	...currentBoards,
+		// 	{
+		// 		id: v4(),
+		// 		name: boardValue,
+		// 		lists: [],
+		// 	},
+		// ]
+		// await updateDoc(doc(db, 'users', currentUser.uid), {
+		// 	boards: newBoards,
+		// })
 	} catch (error) {
 		throw new Error('Не удалось добавить доску')
 	}
