@@ -73,7 +73,8 @@ export const addNewCardAPI = async ({
 		const userDoc = doc(db, 'users', currentUser ? currentUser.uid : '')
 		const userSnapshot = await getDoc(userDoc)
 		const Boards = userSnapshot.data()?.boards as BoardType[]
-		// const currentBoard = Boards.find((board) => board.id === boardValue)
+		const currentBoard = Boards.find((board) => board.id === boardId)
+		console.log(currentBoard)
 
 		// const currentList = currentBoard?.lists.find(
 		// 	(listItem) => listItem.id === listId,

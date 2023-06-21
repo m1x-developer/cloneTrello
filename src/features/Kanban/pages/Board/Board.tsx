@@ -29,17 +29,18 @@ export const Board = () => {
 		userCollection &&
 		userCollection.boards.find((board) => board.id === boardId)
 
-	const addNewColumnCardHandler = (listId: string, boardId: string) => {
-		const cardsItems = currentBoard?.columns.find(
-			(column) => column.id === listId,
+	const addNewColumnCardHandler = (columnCardId: string, boardId: string) => {
+		const columnItems = currentBoard?.columns.find(
+			(column) => column.id === columnCardId,
 		)?.columnCards
+
 		const newCard = () => {
 			const newCardItem = {
 				name: 'Новая карточка',
 				id: v4,
 			}
-			if (cardsItems) {
-				return [...cardsItems, newCardItem]
+			if (columnItems) {
+				return [...columnItems, newCardItem]
 			}
 		}
 
